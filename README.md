@@ -6,6 +6,15 @@
 - Sergio
 - Ajiri
 
+# Languages, tools & technology
+
+- Django
+- Python
+- JavaScript
+- Bootstrap
+- CSS
+- HTML
+
 # Description
 This project consisted on creating an application that allowed users to match with others based on hobbies. In addition, it allows them to exchange numbers with their matches and send likes to other users
 
