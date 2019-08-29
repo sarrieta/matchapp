@@ -1,0 +1,122 @@
+{% extends 'matchapp/base.html' %}
+{% load static %}
+{% load extras %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Matches page that shows similar hobbies -->
+
+
+    <br>
+    <img class="img-fluid" src ="{% static 'images/matches.png'%}">
+            <br>
+            <h4 class="subtitle">You have {{numberOfhobbies}} match(es) </h4>
+            <p id="messageValidation"></p>
+
+            <form method="GET" action="{% url 'filter' %}" id=filter-form>
+                <!-- Filter panel starts -->
+                <div id='grad' class="container-fluid bg-light ">
+                    <div  class="row align-items-center justify-content-center">
+                        <div class="col-md-2">
+                        <b>Filter by:</b>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group ">
+                                <nav id="topNav">
+
+                                    <b> Age: </b>
+                                    <div id="slider-range"></div>
+                                    <div id="custom-handle" class="ui-slider-handle"></div>
+                                    <input id="range1" name="age-min" readonly>
+                                    &nbsp;<input id="range2" name="age-max" readonly>
+
+
+                                </nav>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                                <nav id="topNav2">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="input-group">
+                                                <div class="input-group-btn" data-toggle="buttons">
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" class="gender" id="pr1" name="gender" value="M">Male
+                                                        <i class='fas fa-mars' style='font-size:24px'></i>
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" class="gender" id="pr2" name="gender" value="F">Female
+                                                        <i class='fas fa-venus' style='font-size:24px'></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group ">
+                                <nav id="topNav3">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <button class="btn btn-success" type="submit" id="save_button">
+                                                <span class="btn-label"> <i class="glyphicon glyphicon-search"></i>
+                                                </span>Search</button>
+
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group ">
+                                <nav id="topNav4">
+                                    <ul style="list-style: none;">
+                                        <li>
+
+                                            <button type="button" class="btn btn-labeled btn-info" id="reset_button">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-refresh"></i></span>Refresh</button>
+
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+            <!-- Filter pannel ends -->
+
+            <!-- Results of filter -->
+            <div id=matches>
+                {%for match in matches%}
+    <div class="col-sm-4 my-4">
+            <div class="card">
+                <img class="card-img-top" src="{{match.profile.image.url}}" alt="Card_image_cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ match.username }}: {{ match.profile.age }} {{ match.profile.gender }}</br></h5>
+                        {% if match|check_likes:u %}
+                            <input type="image" id={{match.id}} class='heart' name="submit" src="{% static '/images/like_2.png' %}"
+                                border="0" alt="Submit" style="width: 50px; border:0 none;" />
+                            {%else%}
+                            <input type="image" id={{match.id}} class='heart' name="submit" src="{% static '/images/like_1.png' %}"
+                                border="0" alt="Submit" style="width: 50px; border:0 none; outline:0;" />
+                        {%endif%}
+
+                    </div>
+
+                     <div class = "card-footer"> You have <b> {{match|similarHobbiesCount:u}} </b> hobbies in common </div>
+            </div>
+    </div>
+                {%endfor%}
+            </div>
+
+
+{% endblock %}

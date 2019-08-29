@@ -1,0 +1,91 @@
+{% load static %}
+{% load django_simple_cookie_consent_tags %}
+<!DOCTYPE html>
+<html>
+
+<html lang="en">
+
+<head>
+
+    {% display_cookie_consent %}
+
+    <link rel="stylesheet" href="{% static 'matchapp/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'matchapp.ico' %}" />
+    <title>{{appname}}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link type="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+        crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+</head>
+
+<style>
+body{
+
+  
+}
+
+}
+</style>
+<body id = "mainBody">
+
+    {% if loggedIn %}
+    <div class="topnav" id="myTopnav">
+        <div class="floatLeftNav">
+            <a href="{% url 'displayProfile' %}"> <i class="fab fa-meetup fa-2x"></i></a>
+            <a class="profile" href="{% url 'displayProfile' %}" name="displayProfile">Profile <i class="fas fa-users fa-2x"></i></a>
+            <a href="{% url 'similarHobbies' %}">Matches <i class="fas fa-magic fa-2x"></i></a>
+            <a href="{% url 'contact' %}">Mutual Likes <i class="fas fa-heart fa-2x"></i></a>
+
+        </div>
+        <div class="floatRightNav">
+            <a href="{% url 'logout' %}">Log out <i class="fas fa-sign-out-alt fa-2x"></i></a>
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="navBar()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    {% endif%}
+    <center>
+        <br>
+        {% block title %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </center>
+
+
+
+</body>
+<!-- Latest compiled JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Datepicker imports-->
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- Datepicker imports end-->
+
+<script src="{% static 'matchapp/scripts.js' %}"></script>
+<script src="{% static 'matchapp/ajax.js' %}"></script>
+<script src="{% static 'matchapp/file.js' %}"></script>
+
+
+
+</html>

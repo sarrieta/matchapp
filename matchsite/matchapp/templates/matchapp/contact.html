@@ -1,0 +1,60 @@
+{% extends 'matchapp/base.html' %}
+{% load static %}
+{% load extras %}
+
+{% block content %}
+
+<!-- Mutual Likes page -->
+
+</br>
+<img class="img-fluid" src ="{% static 'images/mutual.png'%}">
+<div id='matches'>
+
+    {% if likes %}
+
+    {% for like in likes %}
+    {% if u|check_likes:like.to_user %}
+    <!-- Display profile in cards -->
+    <div class="col-sm-4 my-4">
+        <div class="card-groups">
+            <div class="card">
+                <img class="card-img-top" src="{{like.to_user.profile.image.url}}" alt="Card image cap">
+                <div id={{match.id}} class="match">
+                    <div class="card-body text-center" style="height: 75px">
+                        <h5 class="card-title">
+                            {{like.to_user.username}} </br>
+                        </h5>
+                    </div>
+                    <div class="card-footer" style="height: 50px">
+
+                        {% if like.to_user in friends%}
+                        <p> {{like.to_user.profile.number}}</p>
+
+                        {% elif like.to_user|check_request:u %}
+                        <small><a class='btn btn-primary' href="/accept_request/{{ like.to_user.id }}">Accept</a></small>
+                        <small><a class='btn btn-warning' href="/cancel_request/{{ like.to_user.id }}">Ignore</a></small>
+
+                        {% elif like.to_user|check_sent:u %}
+                        <small><a class='btn btn-warning' href="/delete_request/{{like.to_user.id }}">Cancel Request</a></small>
+
+                        {% else %}
+                        <small><a class="btn btn-warning" href="/send_request/{{ like.to_user.id }}">Request Number</a></small>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+    {% endfor %}
+    {% endif %}
+    {% if u|countLike == 0 %}
+    <br><span class='info'>No likes yet</span><br><br>
+    {% endif %}
+</div>
+
+
+{% endblock %}

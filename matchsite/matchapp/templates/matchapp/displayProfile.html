@@ -1,0 +1,82 @@
+{% extends 'matchapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+
+
+
+{% endblock %}
+{% block content %}
+<style>
+
+input{
+border-radius: 50px;
+color: aliceblue;
+background-color: #34495e;
+width:80%;
+}
+
+.card{
+  width: 50%;
+}
+
+
+
+</style>
+
+<div class = "card">
+<!--<div  class='columns is-mobile'>
+      <div class='columns is-half is-offset-one-quarter'>-->
+        <div class="form-group col-md-12">                                
+
+        <h1 class='title is-size3'style="color:#00b1b1;">User Profile</h1>
+        <h3 class='title is-size3'style="color:#581845;">{{user.username}}</h3>
+
+
+        <img alt="User Pic" src="{{user.profile.image.url}}" id="profile-image" width="200" height="128" alt class="img-circle img-fluid">
+        <input id="profile-image-upload" class="hidden">
+        <progress id="progressBar" value="0" max="100" style="width:150px;display:none;">
+        </progress>
+
+        <div style="color:#999;">click here to change profile image</div>
+
+        </div>
+
+      <!--Upload Image Js And Css-->
+
+      <div class="card-body">
+      <div class="form-group col-md-12">                                
+
+    <form id='upload_form' method='POST' action="{% url 'displayProfile' %}" enctype='multipart/form-data'>
+      {% csrf_token %}
+      <input type="file" id="img_file" style="display:none;">
+       <div id='error_signup' class='error_message'> {{error}} </div> </br>
+    </form>
+
+     <!--user details form -->
+      <form  method='POST' class=profileForm action="{% url 'editProfile' %}" enctype='multipart/form-data'> {% csrf_token %}
+
+     
+
+      {% csrf_token %}
+      {{ form|crispy }}
+      {{ member_form|crispy }}
+      <p style = "font-size:10px;"> * Hold CTRL/CMD to select multiple  </p>
+      <br>
+      <button type="submit" class='btn btn-primary'value="Submit">Save</button>
+
+      </form>
+    </div>
+    </div>
+
+    
+
+
+</div>
+
+
+<script src="{% static 'matchapp/scripts.js' %}"></script>
+
+
+{% endblock %}

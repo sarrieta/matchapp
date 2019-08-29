@@ -1,0 +1,77 @@
+{% extends 'matchapp/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+
+<style>
+
+
+
+    
+  body
+  {
+    background: url("/static/images/backgroundWD.jpg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;background=>
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+    font-weight: 300;
+    height: 100vh;
+
+  }
+
+  .in-form{
+
+    background-color:white;
+    padding: 20px;
+    border: 1px solid #494949;
+    border-radius: 6px;
+    display: inline-block;
+    width:40%;
+    margin-top:50px;
+
+  }
+
+  .in-form:hover {
+    color: #494949 !important;
+    border-radius: 50px;
+    border-color: #494949 !important;
+    transition: all 0.3s ease 0s;
+
+  }
+
+
+
+
+
+</style>
+<a>
+  <img class="img-fluid" src="{% static 'images/mmc.png'%}" width="1300" height="128" alt="Meet. Match. Chat." />
+</a>
+<div class='in-form'>
+  <form class="form" method="POST" action="{% url 'login' %}">
+
+      {% csrf_token %}
+      {{ login_form|crispy }}
+
+    
+    <button type="submit" id = "login_submit" class="btn btn-primary" type="submit" 
+    
+      <i class="fa fa-sign-in" value="Login">Login 
+        <i class="fa fa-sign-in "></i>
+      </button>
+      <p id='error_signin' class='error_message'> {{error}} 
+        <p>
+          <p>Don't have an account? 
+            <a href="{% url 'register' %}">Click here</a>.
+          </p>
+        </form>
+      </div>
+    </form>
+  </div>
+
+  {% endblock %}
