@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.http import QueryDict
 from .forms import *
 from django.db import IntegrityError
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.contrib import messages
